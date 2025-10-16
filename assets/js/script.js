@@ -136,30 +136,6 @@ const projectData = {
       demo: "https://energy-analytics-demo.com"
     }
   },
-  "Plant Disease Detection": {
-    title: "Plant Disease Detection",
-    category: "Machine Learning",
-    image: "./assets/images/plant_disease.jpg",
-    description: "Implemented CNN for plant disease detection on 61,486-image leaf dataset with strong validation accuracy. Improved generalization with data augmentation (flip, rotation, scaling) and normalization. Integrated model into Flask app for real-time inference.",
-    features: [
-      "CNN-based image classification",
-      "61,486-image leaf dataset",
-      "Data augmentation techniques",
-      "Flask web application",
-      "Real-time inference pipeline",
-      "Preprocessing and normalization"
-    ],
-    tech: ["Python", "TensorFlow", "Keras", "Flask", "OpenCV", "NumPy"],
-    stats: {
-      stat1: { number: "94%", label: "Validation Accuracy" },
-      stat2: { number: "61K+", label: "Images Trained" },
-      stat3: { number: "15+", label: "Disease Classes" }
-    },
-    links: {
-      github: "https://github.com/kishoratada/plant-disease-detection",
-      demo: "https://plant-disease-demo.com"
-    }
-  },
   "AgentFlow": {
     title: "AgentFlow",
     category: "Generative AI",
@@ -216,57 +192,8 @@ const projectModalFunc = function () {
   projectOverlay.classList.toggle("active");
 }
 
-// Add click event to all project items
-projectItems.forEach(item => {
-  item.addEventListener("click", function (e) {
-    e.preventDefault();
-    
-    const projectTitle = this.querySelector(".project-title").textContent;
-    const projectData_item = projectData[projectTitle];
-    
-    if (projectData_item) {
-      // Update modal content
-      document.querySelector("[data-modal-title]").textContent = projectData_item.title;
-      document.querySelector("[data-modal-category]").textContent = projectData_item.category;
-      document.querySelector("[data-modal-img]").src = projectData_item.image;
-      document.querySelector("[data-modal-img]").alt = projectData_item.title;
-      document.querySelector("[data-modal-description] p").textContent = projectData_item.description;
-      
-      // Update features
-      const featuresList = document.querySelector("[data-modal-features]");
-      featuresList.innerHTML = "";
-      projectData_item.features.forEach(feature => {
-        const li = document.createElement("li");
-        li.textContent = feature;
-        featuresList.appendChild(li);
-      });
-      
-      // Update tech stack
-      const techTags = document.querySelector(".tech-tags");
-      techTags.innerHTML = "";
-      projectData_item.tech.forEach(tech => {
-        const tag = document.createElement("div");
-        tag.className = "tech-tag";
-        tag.textContent = tech;
-        techTags.appendChild(tag);
-      });
-      
-      // Update stats
-      document.querySelector("[data-modal-stat-1] .stat-number").textContent = projectData_item.stats.stat1.number;
-      document.querySelector("[data-modal-stat-1] .stat-label").textContent = projectData_item.stats.stat1.label;
-      document.querySelector("[data-modal-stat-2] .stat-number").textContent = projectData_item.stats.stat2.number;
-      document.querySelector("[data-modal-stat-2] .stat-label").textContent = projectData_item.stats.stat2.label;
-      document.querySelector("[data-modal-stat-3] .stat-number").textContent = projectData_item.stats.stat3.number;
-      document.querySelector("[data-modal-stat-3] .stat-label").textContent = projectData_item.stats.stat3.label;
-      
-      // Update links
-      document.querySelector("[data-modal-github]").href = projectData_item.links.github;
-      document.querySelector("[data-modal-demo]").href = projectData_item.links.demo;
-      
-      projectModalFunc();
-    }
-  });
-});
+// Projects now redirect directly to GitHub repositories
+// Modal functionality removed to allow direct navigation to GitHub
 
 // Add click event to modal close button and overlay
 projectModalCloseBtn.addEventListener("click", projectModalFunc);
@@ -319,115 +246,7 @@ const animateCounter = function (element) {
 // Add scroll event listener
 window.addEventListener('scroll', animateOnScroll);
 
-// GitHub Integration
-const githubUsername = 'Kishor129129'; // Your actual GitHub username
-
-const loadGitHubStats = async () => {
-  try {
-    // Load GitHub stats
-    const response = await fetch(`https://api.github.com/users/${githubUsername}`);
-    const userData = await response.json();
-    
-    // Update repository count
-    document.getElementById('repo-count').textContent = userData.public_repos || 0;
-    
-    // Load repositories for language stats
-    const reposResponse = await fetch(`https://api.github.com/users/${githubUsername}/repos?per_page=100`);
-    const repos = await reposResponse.json();
-    
-    // Calculate language statistics
-    const languageStats = {};
-    let totalBytes = 0;
-    
-    for (const repo of repos) {
-      if (!repo.fork && repo.language) {
-        const lang = repo.language;
-        languageStats[lang] = (languageStats[lang] || 0) + 1;
-      }
-    }
-    
-    // Update language count
-    document.getElementById('language-count').textContent = Object.keys(languageStats).length;
-    
-    // Display top languages
-    const languageStatsContainer = document.getElementById('language-stats');
-    const topLanguages = Object.entries(languageStats)
-      .sort(([,a], [,b]) => b - a)
-      .slice(0, 5);
-    
-    languageStatsContainer.innerHTML = '';
-    topLanguages.forEach(([lang, count]) => {
-      const percentage = Math.round((count / Object.values(languageStats).reduce((a, b) => a + b, 0)) * 100);
-      const languageItem = document.createElement('div');
-      languageItem.className = 'language-item';
-      languageItem.innerHTML = `
-        <span class="language-name">${lang}</span>
-        <span class="language-percentage">${percentage}%</span>
-      `;
-      languageStatsContainer.appendChild(languageItem);
-    });
-    
-    // Load contribution activity (simulated data for now)
-    const contributionGraph = document.getElementById('contribution-graph');
-    contributionGraph.innerHTML = `
-      <div style="text-align: center;">
-        <ion-icon name="git-commit-outline" style="font-size: 24px; color: var(--vegas-gold); margin-bottom: 8px;"></ion-icon>
-        <div>Active Development</div>
-        <div style="font-size: 10px; margin-top: 4px;">Recent commits: ${repos.length}+</div>
-      </div>
-    `;
-    
-    // Animate counters
-    animateCounter(document.getElementById('repo-count'));
-    animateCounter(document.getElementById('language-count'));
-    
-  } catch (error) {
-    console.log('GitHub API error (using fallback data):', error);
-    
-    // Fallback data if API fails
-    document.getElementById('repo-count').textContent = '25+';
-    document.getElementById('commit-count').textContent = '500+';
-    document.getElementById('language-count').textContent = '8';
-    document.getElementById('star-count').textContent = '50+';
-    
-    // Fallback language stats
-    const languageStatsContainer = document.getElementById('language-stats');
-    const fallbackLanguages = [
-      { name: 'Python', percentage: 45 },
-      { name: 'JavaScript', percentage: 25 },
-      { name: 'TypeScript', percentage: 15 },
-      { name: 'SQL', percentage: 10 },
-      { name: 'Other', percentage: 5 }
-    ];
-    
-    languageStatsContainer.innerHTML = '';
-    fallbackLanguages.forEach(lang => {
-      const languageItem = document.createElement('div');
-      languageItem.className = 'language-item';
-      languageItem.innerHTML = `
-        <span class="language-name">${lang.name}</span>
-        <span class="language-percentage">${lang.percentage}%</span>
-      `;
-      languageStatsContainer.appendChild(languageItem);
-    });
-    
-    // Fallback contribution graph
-    const contributionGraph = document.getElementById('contribution-graph');
-    contributionGraph.innerHTML = `
-      <div style="text-align: center;">
-        <ion-icon name="git-commit-outline" style="font-size: 24px; color: var(--vegas-gold); margin-bottom: 8px;"></ion-icon>
-        <div>Active Development</div>
-        <div style="font-size: 10px; margin-top: 4px;">Recent commits: 500+</div>
-      </div>
-    `;
-    
-    // Animate fallback counters
-    animateCounter(document.getElementById('repo-count'));
-    animateCounter(document.getElementById('commit-count'));
-    animateCounter(document.getElementById('language-count'));
-    animateCounter(document.getElementById('star-count'));
-  }
-};
+// GitHub Stats are now displayed using static images from GitHub Readme Stats API
 
 // Initial check for elements already in view
 document.addEventListener('DOMContentLoaded', function() {
@@ -444,8 +263,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
   
-  // Load GitHub stats
-  loadGitHubStats();
+  // GitHub stats are now displayed using static images
   
   animateOnScroll();
 });
