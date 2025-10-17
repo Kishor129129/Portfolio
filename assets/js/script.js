@@ -346,3 +346,238 @@ for (let i = 0; i < navigationLinks.length; i++) {
     window.scrollTo(0, 0);
   });
 }
+
+// Email functionality
+function handleEmailClick(event) {
+  // Check if user has a default email client
+  const hasEmailClient = navigator.userAgent.includes('Mail') || 
+                        navigator.userAgent.includes('Outlook') || 
+                        navigator.userAgent.includes('Thunderbird');
+  
+  if (!hasEmailClient) {
+    // Show a modal or notification for users without email clients
+    showEmailOptions();
+    event.preventDefault();
+  }
+  // If they have an email client, let the default mailto: behavior work
+}
+
+function showEmailOptions() {
+  // Create a modal for email options
+  const modal = document.createElement('div');
+  modal.className = 'email-modal';
+  modal.innerHTML = `
+    <div class="email-modal-content">
+      <div class="email-modal-header">
+        <h3>Choose Contact Method</h3>
+        <button class="email-modal-close" onclick="closeEmailModal()">&times;</button>
+      </div>
+      <div class="email-modal-body">
+        <p>Select your preferred way to contact Kishor:</p>
+        <div class="email-options">
+          <a href="mailto:kishoratada@gmail.com?subject=AI/ML Project Discussion - Portfolio Contact&body=Hi Kishor,%0D%0A%0D%0AI came across your portfolio and I'm interested in discussing a potential AI/ML project with you.%0D%0A%0D%0AProject Details:%0D%0A- Project Type: %0D%0A- Timeline: %0D%0A- Budget Range: %0D%0A- Description: %0D%0A%0D%0APlease let me know your availability and next steps.%0D%0A%0D%0ABest regards," class="email-option">
+            <ion-icon name="mail-outline"></ion-icon>
+            <span>Open Email Client</span>
+          </a>
+          <a href="https://www.linkedin.com/in/kishor-atada-1182272b5" target="_blank" class="email-option">
+            <ion-icon name="logo-linkedin"></ion-icon>
+            <span>Message on LinkedIn</span>
+          </a>
+          <button class="email-option copy-email" onclick="copyEmailToClipboard()">
+            <ion-icon name="copy-outline"></ion-icon>
+            <span>Copy Email Address</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  `;
+  
+  document.body.appendChild(modal);
+  
+  // Add modal styles
+  const style = document.createElement('style');
+  style.textContent = `
+    .email-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 10000;
+      animation: fadeIn 0.3s ease;
+    }
+    
+    .email-modal-content {
+      background: var(--eerie-black-2);
+      border: 1px solid var(--jet);
+      border-radius: 16px;
+      padding: 2rem;
+      max-width: 500px;
+      width: 90%;
+      animation: slideUp 0.3s ease;
+    }
+    
+    .email-modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+    
+    .email-modal-header h3 {
+      color: var(--white-2);
+      margin: 0;
+    }
+    
+    .email-modal-close {
+      background: none;
+      border: none;
+      color: var(--light-gray);
+      font-size: 1.5rem;
+      cursor: pointer;
+      padding: 0;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .email-modal-body p {
+      color: var(--light-gray);
+      margin-bottom: 1.5rem;
+    }
+    
+    .email-options {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    
+    .email-option {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem;
+      background: var(--eerie-black-1);
+      border: 1px solid var(--jet);
+      border-radius: 12px;
+      color: var(--white-2);
+      text-decoration: none;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    
+    .email-option:hover {
+      border-color: var(--orange-yellow-crayola);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px hsla(45, 100%, 72%, 0.2);
+    }
+    
+    .email-option ion-icon {
+      font-size: 1.2rem;
+      color: var(--orange-yellow-crayola);
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    @keyframes slideUp {
+      from { 
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to { 
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  `;
+  
+  document.head.appendChild(style);
+}
+
+function closeEmailModal() {
+  const modal = document.querySelector('.email-modal');
+  if (modal) {
+    modal.remove();
+  }
+}
+
+function copyEmailToClipboard() {
+  const email = 'kishoratada@gmail.com';
+  
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(email).then(() => {
+      showCopySuccess();
+    });
+  } else {
+    // Fallback for older browsers
+    const textArea = document.createElement('textarea');
+    textArea.value = email;
+    document.body.appendChild(textArea);
+    textArea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textArea);
+    showCopySuccess();
+  }
+  
+  closeEmailModal();
+}
+
+function showCopySuccess() {
+  const notification = document.createElement('div');
+  notification.className = 'copy-notification';
+  notification.innerHTML = `
+    <ion-icon name="checkmark-circle"></ion-icon>
+    <span>Email address copied to clipboard!</span>
+  `;
+  
+  const style = document.createElement('style');
+  style.textContent = `
+    .copy-notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: var(--bg-gradient-yellow-1);
+      color: var(--eerie-black-1);
+      padding: 1rem 1.5rem;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      z-index: 10001;
+      animation: slideInRight 0.3s ease;
+      box-shadow: 0 10px 25px hsla(45, 100%, 72%, 0.3);
+    }
+    
+    .copy-notification ion-icon {
+      font-size: 1.2rem;
+    }
+    
+    @keyframes slideInRight {
+      from {
+        opacity: 0;
+        transform: translateX(100px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+  `;
+  
+  document.head.appendChild(style);
+  document.body.appendChild(notification);
+  
+  setTimeout(() => {
+    notification.remove();
+    style.remove();
+  }, 3000);
+}
