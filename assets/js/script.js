@@ -18,42 +18,7 @@ if (sidebarBtn) {
 
 
 
-// testimonials variables
-const testimonialsItem = document.querySelectorAll("[data-testimonials-item]");
-const modalContainer = document.querySelector("[data-modal-container]");
-const modalCloseBtn = document.querySelector("[data-modal-close-btn]");
-const overlay = document.querySelector("[data-overlay]");
-
-// modal variable
-const modalImg = document.querySelector("[data-modal-img]");
-const modalTitle = document.querySelector("[data-modal-title]");
-const modalText = document.querySelector("[data-modal-text]");
-
-// modal toggle function
-const testimonialsModalFunc = function () {
-  modalContainer.classList.toggle("active");
-  overlay.classList.toggle("active");
-}
-
-// add click event to all modal items
-for (let i = 0; i < testimonialsItem.length; i++) {
-
-  testimonialsItem[i].addEventListener("click", function () {
-
-    modalImg.src = this.querySelector("[data-testimonials-avatar]").src;
-    modalImg.alt = this.querySelector("[data-testimonials-avatar]").alt;
-    modalTitle.innerHTML = this.querySelector("[data-testimonials-title]").innerHTML;
-    modalText.innerHTML = this.querySelector("[data-testimonials-text]").innerHTML;
-
-    testimonialsModalFunc();
-
-  });
-
-}
-
-// add click event to modal close button
-modalCloseBtn.addEventListener("click", testimonialsModalFunc);
-overlay.addEventListener("click", testimonialsModalFunc);
+// Removed testimonials functionality - no longer needed
 
 // Project Modal Functionality
 const projectItems = document.querySelectorAll("[data-filter-item]");
@@ -67,7 +32,7 @@ const projectData = {
   "DataWise AI": {
     title: "DataWise AI",
     category: "Generative AI",
-    image: "./assets/images/vendo.jpg",
+    image: "./datawise.jpeg",
     description: "Built an NL-to-SQL analytics platform with RAG using ChromaDB embeddings, enabling conversational BI with multi-turn context and schema grounding. Added automated insights via statistical tests, trend and correlation analysis, and anomaly detection with IQR and Zscore.",
     features: [
       "NL-to-SQL query translation using RAG",
@@ -84,14 +49,14 @@ const projectData = {
       stat3: { number: "80%", label: "Time Saved" }
     },
     links: {
-      github: "https://github.com/kishoratada/datawise-ai",
+      github: "https://github.com/Kishor129129/datawise_ai",
       demo: "https://datawise-ai-demo.com"
     }
   },
   "Retail Revenue Intelligence": {
     title: "Retail Revenue Intelligence",
     category: "Data Engineering",
-    image: "./assets/images/project-2.png",
+    image: "./retailrevenue.jpeg",
     description: "Built a retail analytics warehouse in DuckDB with dbt, 35+ models, and a star schema, orchestrated with Prefect. Enforced 120+ data tests in dbt and Great Expectations with a 96% pass rate. Delivered four Power BI executive dashboards with automated reporting.",
     features: [
       "DuckDB analytics warehouse with dbt",
@@ -108,14 +73,14 @@ const projectData = {
       stat3: { number: "90%", label: "Time Reduction" }
     },
     links: {
-      github: "https://github.com/kishoratada/retail-analytics",
+      github: "https://github.com/Kishor129129/Retail-Revenue-Intelligence-Platform",
       demo: "https://retail-analytics-demo.com"
     }
   },
   "Energy Demand Analytics": {
     title: "Energy Demand Analytics",
     category: "Machine Learning",
-    image: "./assets/images/vendo.jpg",
+    image: "./energydemand.jpeg",
     description: "Modeled 50k+ hourly grid records across 37 European countries from 2015 to 2020. Engineered 33+ time series features and trained XGBoost achieving 2.84% MAPE and 97.16% accuracy with time-based validation and no leakage.",
     features: [
       "50k+ hourly grid records modeling",
@@ -132,14 +97,14 @@ const projectData = {
       stat3: { number: "2.84%", label: "MAPE Score" }
     },
     links: {
-      github: "https://github.com/kishoratada/energy-forecasting",
+      github: "https://github.com/Kishor129129/Energy-Demand-Analytics-Forecasting-Platform",
       demo: "https://energy-analytics-demo.com"
     }
   },
   "AgentFlow": {
     title: "AgentFlow",
     category: "Generative AI",
-    image: "./assets/images/videtect.jpg",
+    image: "./agentflow.jpeg",
     description: "Orchestrated six specialized agents (Planner, Researcher, Analyst, Writer, Critic, QA) using a LangGraph state machine. Features a FastAPI backend with PostgreSQL for persistence and a Streamlit UI for real-time progress display.",
     features: [
       "Six specialized AI agents orchestration",
@@ -156,14 +121,14 @@ const projectData = {
       stat3: { number: "35", label: "Sources Curated" }
     },
     links: {
-      github: "https://github.com/kishoratada/agentflow",
+      github: "https://github.com/Kishor129129/agentflow",
       demo: "https://agentflow-demo.com"
     }
   },
   "GitHub MCP Server": {
     title: "GitHub MCP Server",
     category: "Generative AI",
-    image: "./assets/images/project-2.png",
+    image: "./guthubmcp.jpeg",
     description: "A TypeScript MCP server (STDIO + JSON-RPC) that integrates Gemini for generating PR summaries and risk notes. Supports advanced GitHub queries using fine-grained tokens. Provides five tools for repository management.",
     features: [
       "TypeScript MCP server implementation",
@@ -180,7 +145,7 @@ const projectData = {
       stat3: { number: "24/7", label: "Availability" }
     },
     links: {
-      github: "https://github.com/kishoratada/github-mcp-server",
+      github: "https://github.com/Kishor129129/github-mcp-server",
       demo: "https://github-mcp-demo.com"
     }
   }
@@ -210,14 +175,7 @@ const animateOnScroll = function () {
     if (elementTop < window.innerHeight - elementVisible) {
       element.classList.add('animated');
       
-      // Animate skill progress bars
-      if (element.classList.contains('skill-progress-fill')) {
-        const targetWidth = element.getAttribute('data-width') || '90%';
-        element.style.setProperty('--target-width', targetWidth);
-        setTimeout(() => {
-          element.style.width = targetWidth;
-        }, 100);
-      }
+      // Removed skill progress bar animation - replaced with modern skill tags
       
       // Animate counters
       if (element.classList.contains('counter')) {
@@ -374,7 +332,7 @@ for (let i = 0; i < navigationLinks.length; i++) {
     pages.forEach(page => page.classList.remove("active"));
     
     // Show the target page
-    const targetPage = this.innerHTML.toLowerCase();
+    const targetPage = this.innerHTML.toLowerCase().replace(' ', '');
     console.log("Looking for page:", targetPage);
     
     for (let j = 0; j < pages.length; j++) {
