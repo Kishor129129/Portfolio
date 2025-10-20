@@ -27,6 +27,10 @@
 
 <body>
 
+  <!-- Particle Effects -->
+  <div class="particles-container" id="particles-container"></div>
+  <div class="floating-icons" id="floating-icons"></div>
+
   <!--
     - #MAIN
   -->
@@ -54,19 +58,19 @@
         <ul class="navbar-list">
 
           <li class="navbar-item">
-            <button class="navbar-link  active" data-nav-link>Overview</button>
+            <button class="navbar-link active micro-interaction magnetic" data-nav-link>Overview</button>
           </li>
 
           <li class="navbar-item">
-            <button class="navbar-link" data-nav-link>Experience</button>
+            <button class="navbar-link micro-interaction magnetic" data-nav-link>Experience</button>
           </li>
 
           <li class="navbar-item">
-            <button class="navbar-link" data-nav-link>Projects</button>
+            <button class="navbar-link micro-interaction magnetic" data-nav-link>Projects</button>
           </li>
 
           <li class="navbar-item">
-            <button class="navbar-link" data-nav-link>Hire Me</button>
+            <button class="navbar-link micro-interaction magnetic" data-nav-link>Hire Me</button>
           </li>
 
         </ul>
@@ -89,20 +93,20 @@
         </header>
 
         <!-- Hero Section -->
-        <section class="hero-section animate-on-scroll">
+        <section class="hero-section morphing-bg animate-3d-zoom">
           <div class="hero-content-centered">
             <div class="hero-profile">
-              <div class="profile-image-container">
-                <img src="./WhatsApp Image 2025-10-13 at 5.56.31 PM.jpeg" alt="Kishor Atada" class="hero-profile-image">
+              <div class="profile-image-container card-tilt">
+                <img src="./WhatsApp Image 2025-10-13 at 5.56.31 PM.jpeg" alt="Kishor Atada" class="hero-profile-image glow-effect pulse-animation">
               </div>
               <div class="hero-text-centered">
-              <h1 class="hero-title animate-fade">
-                Hi, I'm <span class="highlight">Kishor Atada</span>
+              <h1 class="hero-title animate-slide-up">
+                Hi, I'm <span class="highlight holographic glitch-effect" data-text="Kishor Atada">Kishor Atada</span>
               </h1>
-              <p class="hero-subtitle animate-fade animate-delay-1">
+              <p class="hero-subtitle animate-rotate animate-delay-200 holographic">
                 AI/ML Engineer & Data Scientist
               </p>
-              <p class="hero-description animate-fade animate-delay-2">
+              <p class="hero-description animate-flip animate-delay-400 hologram-scan">
                   I build intelligent systems that deliver real business value. From machine learning models to 
                   enterprise-grade data solutions, I create technology that companies can depend on for growth.
               </p>
@@ -147,15 +151,15 @@
 
           <ul class="service-list">
 
-            <li class="service-item">
+            <li class="service-item card-tilt micro-interaction animate-3d-slide quantum-hover liquid-morph">
 
-              <div class="service-icon-box">
+              <div class="service-icon-box magnetic">
                 <img src="./assets/images/fullstack.png
                 " alt="design icon" width="40">
               </div>
 
               <div class="service-content-box">
-                <h4 class="h4 service-item-title">Machine Learning & AI</h4>
+                <h4 class="h4 service-item-title glow-effect holographic">Machine Learning & AI</h4>
 
                 <p class="service-item-text">
                   Built a 97% accurate energy forecasting model processing 50K+ records. Specialized in time series analysis, 
@@ -164,14 +168,14 @@
 
             </li>
 
-            <li class="service-item">
+            <li class="service-item card-tilt micro-interaction animate-3d-flip animate-delay-200 quantum-hover crystalline-growth">
 
-              <div class="service-icon-box">
+              <div class="service-icon-box magnetic">
                 <img src="./assets/images/ai.png" alt="ai icon" width="40">
               </div>
 
               <div class="service-content-box">
-                <h4 class="h4 service-item-title">Generative AI & RAG</h4>
+                <h4 class="h4 service-item-title glow-effect holographic">Generative AI & RAG</h4>
 
                 <p class="service-item-text">
                   Built NL-to-SQL platform processing 10K+ queries with 95% accuracy. Creating production RAG systems 
@@ -181,14 +185,14 @@
 
             </li>
 
-            <li class="service-item">
+            <li class="service-item card-tilt micro-interaction animate-bounce animate-delay-400 quantum-hover hologram-scan">
 
-              <div class="service-icon-box">
+              <div class="service-icon-box magnetic">
                 <img src="./assets/images/data.png" alt="mobile app icon" width="40">
               </div>
 
               <div class="service-content-box">
-                <h4 class="h4 service-item-title">Data Engineering & Analytics</h4>
+                <h4 class="h4 service-item-title glow-effect holographic">Data Engineering & Analytics</h4>
 
                 <p class="service-item-text">
                   Built retail analytics warehouse with 35+ data models reducing manual work by 90%. Created automated 
@@ -198,14 +202,14 @@
 
             </li>
 
-            <li class="service-item">
+            <li class="service-item card-tilt micro-interaction animate-rotate animate-delay-600">
 
-              <div class="service-icon-box">
+              <div class="service-icon-box magnetic">
                 <img src="./assets/images/backend.png" alt="ai icon" width="40">
               </div>
 
               <div class="service-content-box">
-                <h4 class="h4 service-item-title">Backend & APIs</h4>
+                <h4 class="h4 service-item-title glow-effect">Backend & APIs</h4>
 
                 <p class="service-item-text">
                   Built FastAPI backends with PostgreSQL that handle real production traffic. Created agent orchestration 
@@ -219,50 +223,50 @@
         </section>
 
         <!-- Skills Section -->
-        <section class="skills-showcase">
-          <h3 class="h3 section-title">Technical Skills</h3>
-          <p class="section-subtitle">Technologies I work with to build production-ready solutions</p>
+        <section class="skills-showcase animate-slide-up">
+          <h3 class="h3 section-title animate-flip">Technical Skills</h3>
+          <p class="section-subtitle animate-bounce animate-delay-200">Technologies I work with to build production-ready solutions</p>
 
           <div class="skills-container">
-            <div class="skills-category">
+            <div class="skills-category card-tilt animate-3d-slide">
               <div class="category-header">
-                <div class="category-icon">
+                <div class="category-icon magnetic">
                   <ion-icon name="code-slash-outline"></ion-icon>
                 </div>
-                <h4 class="category-title">Programming Languages</h4>
+                <h4 class="category-title glow-effect">Programming Languages</h4>
               </div>
               <div class="skills-grid">
-                <div class="skill-item">
+                <div class="skill-item magnetic micro-interaction animate-scale">
                   <div class="skill-icon">
                     <ion-icon name="logo-python"></ion-icon>
                   </div>
                   <span class="skill-name">Python</span>
                 </div>
-                <div class="skill-item">
+                <div class="skill-item magnetic micro-interaction animate-scale animate-delay-100">
                   <div class="skill-icon">
                     <ion-icon name="logo-javascript"></ion-icon>
                   </div>
                   <span class="skill-name">JavaScript</span>
                 </div>
-                <div class="skill-item">
+                <div class="skill-item magnetic micro-interaction animate-scale animate-delay-200">
                   <div class="skill-icon">
                     <ion-icon name="logo-html5"></ion-icon>
                   </div>
                   <span class="skill-name">HTML5</span>
                 </div>
-                <div class="skill-item">
+                <div class="skill-item magnetic micro-interaction animate-scale animate-delay-300">
                   <div class="skill-icon">
                     <ion-icon name="logo-css3"></ion-icon>
                   </div>
                   <span class="skill-name">CSS3</span>
                 </div>
-                <div class="skill-item">
+                <div class="skill-item magnetic micro-interaction animate-scale animate-delay-400">
                   <div class="skill-icon">
                     <ion-icon name="logo-nodejs"></ion-icon>
                   </div>
                   <span class="skill-name">TypeScript</span>
                 </div>
-                <div class="skill-item">
+                <div class="skill-item magnetic micro-interaction animate-scale animate-delay-500">
                   <div class="skill-icon">
                     <ion-icon name="server-outline"></ion-icon>
                   </div>
@@ -706,11 +710,11 @@
 
           <ul class="project-list">
 
-            <li class="project-item  active" data-filter-item data-category="generative ai">
+            <li class="project-item active card-tilt micro-interaction animate-3d-flip" data-filter-item data-category="generative ai">
               <a href="https://github.com/Kishor129129/datawise_ai" target="_blank">
 
                 <figure class="project-img">
-                  <div class="project-item-icon-box">
+                  <div class="project-item-icon-box magnetic">
                     <ion-icon name="eye-outline"></ion-icon>
                   </div>
 
@@ -718,7 +722,7 @@
                 </figure>
 
                 <div class="project-content">
-                <h3 class="project-title">DataWise AI</h3>
+                <h3 class="project-title glow-effect">DataWise AI</h3>
                 <p class="project-category">Generative AI</p>
                 <div class="project-description">
                   <p>Built an NL-to-SQL analytics platform with RAG using ChromaDB embeddings, enabling conversational BI with multi-turn context and schema grounding.</p>
@@ -728,11 +732,11 @@
               </a>
             </li>
 
-            <li class="project-item  active" data-filter-item data-category="data engineering">
+            <li class="project-item  active animate-matrix animate-delay-200 card-tilt micro-interaction" data-filter-item data-category="data engineering">
               <a href="https://github.com/Kishor129129/Retail-Revenue-Intelligence-Platform" target="_blank">
 
                 <figure class="project-img">
-                  <div class="project-item-icon-box">
+                  <div class="project-item-icon-box magnetic">
                     <ion-icon name="eye-outline"></ion-icon>
                   </div>
 
@@ -740,7 +744,7 @@
                 </figure>
 
                 <div class="project-content">
-                <h3 class="project-title">Retail Revenue Intelligence</h3>
+                <h3 class="project-title glow-effect">Retail Revenue Intelligence</h3>
                 <p class="project-category">Data Engineering</p>
                 <div class="project-description">
                   <p>Built a retail analytics warehouse in DuckDB with dbt, 35+ models, and star schema. Delivered Power BI dashboards with automated reporting, cutting manual time by ~90%.</p>
@@ -750,11 +754,11 @@
               </a>
             </li>
 
-            <li class="project-item  active" data-filter-item data-category="machine learning">
+            <li class="project-item  active animate-quantum animate-delay-400 card-tilt micro-interaction" data-filter-item data-category="machine learning">
               <a href="https://github.com/Kishor129129/Energy-Demand-Analytics-Forecasting-Platform" target="_blank">
 
                 <figure class="project-img">
-                  <div class="project-item-icon-box">
+                  <div class="project-item-icon-box magnetic">
                     <ion-icon name="eye-outline"></ion-icon>
                   </div>
 
@@ -762,7 +766,7 @@
                 </figure>
 
                 <div class="project-content">
-                <h3 class="project-title">Energy Demand Analytics</h3>
+                <h3 class="project-title glow-effect">Energy Demand Analytics</h3>
                 <p class="project-category">Machine Learning</p>
                 <div class="project-description">
                   <p>Modeled 50k+ hourly grid records across 37 European countries. Engineered 33+ time series features and trained XGBoost achieving 2.84% MAPE with 97.16% accuracy.</p>
@@ -775,11 +779,11 @@
 
 
 
-            <li class="project-item  active" data-filter-item data-category="web development">
+            <li class="project-item  active animate-matrix animate-delay-300 card-tilt micro-interaction" data-filter-item data-category="web development">
               <a href="https://github.com/Kishor129129/Videtect" target="_blank">
 
                 <figure class="project-img">
-                  <div class="project-item-icon-box">
+                  <div class="project-item-icon-box magnetic">
                     <ion-icon name="eye-outline"></ion-icon>
                   </div>
 
@@ -787,7 +791,7 @@
                 </figure>
 
                 <div class="project-content">
-                <h3 class="project-title">videtect</h3>
+                <h3 class="project-title glow-effect">videtect</h3>
                   <p class="project-category">Web Development</p>
                   <div class="project-description">
                     <p>Built a real-time video analysis platform using computer vision and machine learning for object detection and tracking in video streams.</p>
@@ -799,11 +803,11 @@
 
 
 
-            <li class="project-item  active" data-filter-item data-category="generative ai">
+            <li class="project-item  active animate-hologram animate-delay-600 card-tilt micro-interaction" data-filter-item data-category="generative ai">
               <a href="https://github.com/Kishor129129/agentflow" target="_blank">
 
                 <figure class="project-img">
-                  <div class="project-item-icon-box">
+                  <div class="project-item-icon-box magnetic">
                     <ion-icon name="eye-outline"></ion-icon>
                   </div>
 
@@ -811,7 +815,7 @@
                 </figure>
 
                 <div class="project-content">
-                <h3 class="project-title">AgentFlow</h3>
+                <h3 class="project-title glow-effect">AgentFlow</h3>
                 <p class="project-category">Generative AI</p>
                 <div class="project-description">
                   <p>Orchestrated six specialized agents (Planner, Researcher, Analyst, Writer, Critic, QA) using LangGraph state machine. Features FastAPI backend with PostgreSQL and Streamlit UI for real-time progress display.</p>
@@ -821,11 +825,11 @@
               </a>
             </li>
 
-            <li class="project-item  active" data-filter-item data-category="generative ai">
+            <li class="project-item  active animate-crystalline animate-delay-800 card-tilt micro-interaction" data-filter-item data-category="generative ai">
               <a href="https://github.com/Kishor129129/github-mcp-server" target="_blank">
 
                 <figure class="project-img">
-                  <div class="project-item-icon-box">
+                  <div class="project-item-icon-box magnetic">
                     <ion-icon name="eye-outline"></ion-icon>
                   </div>
 
@@ -833,7 +837,7 @@
                 </figure>
 
                 <div class="project-content">
-                <h3 class="project-title">GitHub MCP Server</h3>
+                <h3 class="project-title glow-effect">GitHub MCP Server</h3>
                 <p class="project-category">Generative AI</p>
                 <div class="project-description">
                   <p>TypeScript MCP server with STDIO + JSON-RPC integration. Integrates Gemini for generating PR summaries and risk notes, supports advanced GitHub queries with fine-grained tokens.</p>
@@ -987,17 +991,17 @@
           <p class="form-subtitle">Ready to build something amazing? Get in touch!</p>
 
           <div class="cta-buttons">
-            <a href="mailto:kishoratada@gmail.com?subject=AI/ML Project Discussion - Portfolio Contact&body=Hi Kishor,%0D%0A%0D%0AI came across your portfolio and I'm interested in discussing a potential AI/ML project with you.%0D%0A%0D%0AProject Details:%0D%0A- Project Type: %0D%0A- Timeline: %0D%0A- Budget Range: %0D%0A- Description: %0D%0A%0D%0APlease let me know your availability and next steps.%0D%0A%0D%0ABest regards," class="cta-btn primary" onclick="handleEmailClick(event)">
+            <a href="mailto:kishoratada@gmail.com?subject=AI/ML Project Discussion - Portfolio Contact&body=Hi Kishor,%0D%0A%0D%0AI came across your portfolio and I'm interested in discussing a potential AI/ML project with you.%0D%0A%0D%0AProject Details:%0D%0A- Project Type: %0D%0A- Timeline: %0D%0A- Budget Range: %0D%0A- Description: %0D%0A%0D%0APlease let me know your availability and next steps.%0D%0A%0D%0ABest regards," class="cta-btn primary micro-interaction glow-effect animate-bounce" onclick="handleEmailClick(event)">
               <ion-icon name="mail-outline"></ion-icon>
               <span>Email Me</span>
             </a>
             
-            <a href="https://www.linkedin.com/in/kishor-atada-1182272b5" target="_blank" class="cta-btn secondary">
+            <a href="https://www.linkedin.com/in/kishor-atada-1182272b5" target="_blank" class="cta-btn secondary micro-interaction animate-3d-slide animate-delay-200">
               <ion-icon name="logo-linkedin"></ion-icon>
               <span>Connect on LinkedIn</span>
             </a>
             
-            <a href="https://github.com/Kishor129129" target="_blank" class="cta-btn secondary">
+            <a href="https://github.com/Kishor129129" target="_blank" class="cta-btn secondary micro-interaction animate-3d-flip animate-delay-400">
               <ion-icon name="logo-github"></ion-icon>
               <span>View My Code</span>
             </a>

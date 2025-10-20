@@ -164,9 +164,9 @@ const projectModalFunc = function () {
 projectModalCloseBtn.addEventListener("click", projectModalFunc);
 projectOverlay.addEventListener("click", projectModalFunc);
 
-// Scroll Animation Functionality
+// Enhanced Scroll Animation Functionality
 const animateOnScroll = function () {
-  const elements = document.querySelectorAll('.animate-on-scroll, .animate-left, .animate-right, .animate-scale, .animate-fade');
+  const elements = document.querySelectorAll('.animate-on-scroll, .animate-left, .animate-right, .animate-scale, .animate-fade, .animate-slide-up, .animate-slide-down, .animate-rotate, .animate-flip, .animate-bounce, .animate-3d-flip, .animate-3d-slide, .animate-3d-zoom, .animate-matrix, .animate-quantum, .animate-hologram, .animate-crystalline');
   
   elements.forEach(element => {
     const elementTop = element.getBoundingClientRect().top;
@@ -175,13 +175,126 @@ const animateOnScroll = function () {
     if (elementTop < window.innerHeight - elementVisible) {
       element.classList.add('animated');
       
-      // Removed skill progress bar animation - replaced with modern skill tags
-      
       // Animate counters
       if (element.classList.contains('counter')) {
         animateCounter(element);
       }
+      
+      // Text reveal animation
+      if (element.classList.contains('text-reveal')) {
+        animateTextReveal(element);
+      }
     }
+  });
+};
+
+// Text Reveal Animation
+const animateTextReveal = function (element) {
+  const text = element.textContent;
+  element.innerHTML = '';
+  
+  text.split('').forEach((char, index) => {
+    const span = document.createElement('span');
+    span.textContent = char === ' ' ? '\u00A0' : char;
+    span.style.transitionDelay = `${index * 0.05}s`;
+    element.appendChild(span);
+  });
+  
+  element.classList.add('revealed');
+};
+
+// Particle Effects System
+const createParticles = function () {
+  const container = document.getElementById('particles-container');
+  const particleCount = 50;
+  
+  for (let i = 0; i < particleCount; i++) {
+    const particle = document.createElement('div');
+    particle.className = 'particle';
+    
+    // Random size between 2px and 6px
+    const size = Math.random() * 4 + 2;
+    particle.style.width = `${size}px`;
+    particle.style.height = `${size}px`;
+    
+    // Random starting position
+    particle.style.left = `${Math.random() * 100}%`;
+    particle.style.animationDelay = `${Math.random() * 6}s`;
+    particle.style.animationDuration = `${Math.random() * 8 + 6}s`;
+    
+    // Random opacity
+    particle.style.opacity = Math.random() * 0.5 + 0.1;
+    
+    container.appendChild(particle);
+  }
+};
+
+// Floating Tech Icons
+const createFloatingIcons = function () {
+  const container = document.getElementById('floating-icons');
+  const icons = ['logo-python', 'logo-javascript', 'logo-html5', 'logo-css3', 'logo-nodejs', 'server-outline', 'analytics-outline', 'code-slash-outline'];
+  const iconCount = 20;
+  
+  for (let i = 0; i < iconCount; i++) {
+    const icon = document.createElement('ion-icon');
+    icon.className = 'floating-icon';
+    icon.name = icons[Math.floor(Math.random() * icons.length)];
+    
+    // Random starting position
+    icon.style.left = `${Math.random() * 100}%`;
+    icon.style.animationDelay = `${Math.random() * 15}s`;
+    icon.style.animationDuration = `${Math.random() * 10 + 15}s`;
+    
+    container.appendChild(icon);
+  }
+};
+
+// Magnetic Effect for Elements
+const initMagneticEffect = function () {
+  const magneticElements = document.querySelectorAll('.magnetic');
+  
+  magneticElements.forEach(element => {
+    element.addEventListener('mousemove', function(e) {
+      const rect = element.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      
+      const distance = Math.sqrt(x * x + y * y);
+      const maxDistance = 100;
+      
+      if (distance < maxDistance) {
+        const moveX = (x / maxDistance) * 10;
+        const moveY = (y / maxDistance) * 10;
+        
+        element.style.transform = `translate(${moveX}px, ${moveY}px) scale(1.05)`;
+      }
+    });
+    
+    element.addEventListener('mouseleave', function() {
+      element.style.transform = 'translate(0px, 0px) scale(1)';
+    });
+  });
+};
+
+// Enhanced Card Tilt Effect
+const initCardTilt = function () {
+  const tiltElements = document.querySelectorAll('.card-tilt');
+  
+  tiltElements.forEach(element => {
+    element.addEventListener('mousemove', function(e) {
+      const rect = element.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      
+      const rotateX = (y / rect.height) * 20;
+      const rotateY = (x / rect.width) * 20;
+      
+      element.style.transform = `perspective(1000px) rotateX(${-rotateX}deg) rotateY(${rotateY}deg) translateZ(20px)`;
+    });
+    
+    element.addEventListener('mouseleave', function() {
+      element.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0px)';
+    });
   });
 };
 
@@ -206,24 +319,185 @@ window.addEventListener('scroll', animateOnScroll);
 
 // GitHub Stats are now displayed using static images from GitHub Readme Stats API
 
-// Initial check for elements already in view
+// Ultra Advanced Animation Functions
+const createMatrixRain = function () {
+  const container = document.createElement('div');
+  container.className = 'matrix-rain';
+  document.body.appendChild(container);
+  
+  const characters = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+  const charArray = characters.split('');
+  
+  for (let i = 0; i < 50; i++) {
+    const char = document.createElement('div');
+    char.className = 'matrix-char';
+    char.textContent = charArray[Math.floor(Math.random() * charArray.length)];
+    
+    char.style.left = `${Math.random() * 100}%`;
+    char.style.animationDelay = `${Math.random() * 10}s`;
+    char.style.animationDuration = `${Math.random() * 5 + 5}s`;
+    
+    container.appendChild(char);
+  }
+};
+
+const createNeuralNetwork = function () {
+  const container = document.createElement('div');
+  container.className = 'neural-network';
+  document.body.appendChild(container);
+  
+  const nodeCount = 20;
+  const nodes = [];
+  
+  // Create nodes
+  for (let i = 0; i < nodeCount; i++) {
+    const node = document.createElement('div');
+    node.className = 'neural-node';
+    node.style.left = `${Math.random() * 100}%`;
+    node.style.top = `${Math.random() * 100}%`;
+    node.style.animationDelay = `${Math.random() * 4}s`;
+    container.appendChild(node);
+    nodes.push(node);
+  }
+  
+  // Create connections
+  for (let i = 0; i < nodeCount - 1; i++) {
+    const connection = document.createElement('div');
+    connection.className = 'neural-connection';
+    
+    const node1 = nodes[i];
+    const node2 = nodes[i + 1];
+    
+    const rect1 = node1.getBoundingClientRect();
+    const rect2 = node2.getBoundingClientRect();
+    
+    const angle = Math.atan2(rect2.top - rect1.top, rect2.left - rect1.left);
+    const distance = Math.sqrt(Math.pow(rect2.left - rect1.left, 2) + Math.pow(rect2.top - rect1.top, 2));
+    
+    connection.style.left = `${rect1.left}px`;
+    connection.style.top = `${rect1.top}px`;
+    connection.style.width = `${distance}px`;
+    connection.style.transform = `rotate(${angle}rad)`;
+    connection.style.animationDelay = `${Math.random() * 3}s`;
+    
+    container.appendChild(connection);
+  }
+};
+
+const createQuantumParticles = function () {
+  const container = document.createElement('div');
+  container.className = 'quantum-particles';
+  document.body.appendChild(container);
+  
+  for (let i = 0; i < 30; i++) {
+    const particle = document.createElement('div');
+    particle.className = 'quantum-particle';
+    
+    particle.style.left = `${Math.random() * 100}%`;
+    particle.style.top = `${Math.random() * 100}%`;
+    particle.style.animationDelay = `${Math.random() * 6}s`;
+    particle.style.animationDuration = `${Math.random() * 4 + 4}s`;
+    
+    container.appendChild(particle);
+  }
+};
+
+const createDataStream = function () {
+  const container = document.createElement('div');
+  container.className = 'data-stream';
+  document.body.appendChild(container);
+  
+  for (let i = 0; i < 25; i++) {
+    const dataBit = document.createElement('div');
+    dataBit.className = 'data-bit';
+    
+    dataBit.style.left = `${Math.random() * 100}%`;
+    dataBit.style.animationDelay = `${Math.random() * 4}s`;
+    dataBit.style.animationDuration = `${Math.random() * 3 + 3}s`;
+    
+    container.appendChild(dataBit);
+  }
+};
+
+const createMagneticField = function () {
+  const container = document.createElement('div');
+  container.className = 'magnetic-field';
+  document.body.appendChild(container);
+  
+  for (let i = 0; i < 15; i++) {
+    const fieldLine = document.createElement('div');
+    fieldLine.className = 'field-line';
+    
+    fieldLine.style.left = `${Math.random() * 100}%`;
+    fieldLine.style.top = `${Math.random() * 100}%`;
+    fieldLine.style.animationDelay = `${Math.random() * 5}s`;
+    fieldLine.style.animationDuration = `${Math.random() * 3 + 3}s`;
+    
+    container.appendChild(fieldLine);
+  }
+};
+
+const initUltraAdvancedAnimations = function () {
+  // Create ultra-advanced background effects
+  createMatrixRain();
+  createNeuralNetwork();
+  createQuantumParticles();
+  createDataStream();
+  createMagneticField();
+};
+
+// Initialize all advanced animations
 document.addEventListener('DOMContentLoaded', function() {
+  // Make body visible immediately
+  document.body.style.opacity = '1';
+  
+  // Create particle effects
+  createParticles();
+  createFloatingIcons();
+  
+  // Initialize ultra-advanced animations
+  initUltraAdvancedAnimations();
+  
+  // Initialize interactive effects
+  initMagneticEffect();
+  initCardTilt();
+  
   // Make hero section visible immediately
   const heroSection = document.querySelector('.hero-section');
   if (heroSection) {
     heroSection.classList.add('animated');
     // Also animate hero elements immediately
-    const heroElements = heroSection.querySelectorAll('.animate-fade, .animate-scale, .animate-right');
+    const heroElements = heroSection.querySelectorAll('.animate-fade, .animate-scale, .animate-right, .animate-slide-up, .animate-3d-zoom, .animate-flip, .animate-rotate');
     heroElements.forEach((element, index) => {
       setTimeout(() => {
         element.classList.add('animated');
-      }, index * 100);
+      }, index * 200);
     });
   }
   
-  // GitHub stats are now displayed using static images
+  // Animate skills section with staggered delays
+  const skillItems = document.querySelectorAll('.skill-item');
+  skillItems.forEach((item, index) => {
+    setTimeout(() => {
+      item.classList.add('animated');
+    }, index * 100);
+  });
   
+  // Initialize scroll animations
   animateOnScroll();
+  
+  // Add shake animation to buttons on click
+  const buttons = document.querySelectorAll('button, .cta-btn');
+  buttons.forEach(button => {
+    button.addEventListener('click', function() {
+      this.classList.add('shake-animation');
+      setTimeout(() => {
+        this.classList.remove('shake-animation');
+      }, 500);
+    });
+  });
+  
+  // Hero title animation is now handled by CSS classes
 });
 
 
