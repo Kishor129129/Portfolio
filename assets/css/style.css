@@ -7,6 +7,81 @@
  * copyright 2022 @codewithsadee
  */
 
+/*-----------------------------------*\
+  #PERFORMANCE OPTIMIZATION
+\*-----------------------------------*/
+
+/* Optimize rendering performance */
+* {
+  will-change: auto;
+}
+
+/* Optimize animations for performance */
+.animate-on-scroll,
+.animate-left,
+.animate-right,
+.animate-scale,
+.animate-fade,
+.animate-slide-up,
+.animate-slide-down,
+.animate-rotate,
+.animate-flip,
+.animate-bounce,
+.animate-3d-flip,
+.animate-3d-slide,
+.animate-3d-zoom,
+.animate-matrix,
+.animate-quantum,
+.animate-hologram,
+.animate-crystalline {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+/* Optimize particle effects */
+.particle,
+.floating-icon,
+.matrix-char,
+.neural-node,
+.neural-connection,
+.quantum-particle,
+.data-bit,
+.field-line {
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+/* Lazy loading placeholder */
+img.lazy {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+img.lazy.loaded {
+  opacity: 1;
+}
+
+/* Optimize hover effects */
+.micro-interaction,
+.card-tilt,
+.magnetic,
+.glow-effect {
+  will-change: transform, box-shadow;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 
 
 

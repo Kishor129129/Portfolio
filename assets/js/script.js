@@ -446,10 +446,43 @@ const initUltraAdvancedAnimations = function () {
   createMagneticField();
 };
 
+// Service Worker Registration
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js')
+      .then(registration => {
+        console.log('Service Worker registered successfully:', registration.scope);
+      })
+      .catch(error => {
+        console.log('Service Worker registration failed:', error);
+      });
+  });
+}
+
+// Performance optimization - Intersection Observer for lazy loading
+const imageObserver = new IntersectionObserver((entries, observer) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const img = entry.target;
+      if (img.dataset.src) {
+        img.src = img.dataset.src;
+        img.removeAttribute('data-src');
+        img.classList.remove('lazy');
+        observer.unobserve(img);
+      }
+    }
+  });
+});
+
 // Initialize all advanced animations
 document.addEventListener('DOMContentLoaded', function() {
   // Make body visible immediately
   document.body.style.opacity = '1';
+  
+  // Observe all lazy images
+  document.querySelectorAll('img[data-src]').forEach(img => {
+    imageObserver.observe(img);
+  });
   
   // Create particle effects
   createParticles();

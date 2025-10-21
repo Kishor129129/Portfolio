@@ -1,0 +1,33 @@
+{
+  "name": "kishor-atada-portfolio",
+  "version": "1.0.0",
+  "description": "AI/ML Engineer & Data Scientist Portfolio with Advanced Animations",
+  "main": "index.html",
+  "scripts": {
+    "build": "node build.js",
+    "dev": "python -m http.server 8000",
+    "serve": "python -m http.server 8000"
+  },
+  "keywords": [
+    "portfolio",
+    "ai",
+    "machine-learning",
+    "data-science",
+    "generative-ai",
+    "animations",
+    "performance"
+  ],
+  "author": "Kishor Atada",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Kishor129129/Portfolio.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Kishor129129/Portfolio/issues"
+  },
+  "homepage": "https://kishor129129.github.io/Portfolio/",
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
