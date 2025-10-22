@@ -1,0 +1,50 @@
+{
+  "name": "Kishor Atada - AI/ML Engineer & Data Scientist",
+  "short_name": "Kishor Atada",
+  "description": "AI/ML Engineer & Data Scientist Portfolio showcasing machine learning projects, generative AI solutions, and data engineering expertise.",
+  "start_url": "/Portfolio/",
+  "display": "standalone",
+  "background_color": "#1a1a1a",
+  "theme_color": "#ffc107",
+  "orientation": "portrait-primary",
+  "scope": "/Portfolio/",
+  "lang": "en-US",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "/Portfolio/WhatsApp Image 2025-10-13 at 5.56.31 PM.jpeg",
+      "sizes": "192x192",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/Portfolio/WhatsApp Image 2025-10-13 at 5.56.31 PM.jpeg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": [
+    "portfolio",
+    "ai",
+    "machine-learning",
+    "data-science",
+    "technology"
+  ],
+  "screenshots": [
+    {
+      "src": "/Portfolio/website-demo-image/desktop.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
+    },
+    {
+      "src": "/Portfolio/website-demo-image/mobile.png",
+      "sizes": "375x667",
+      "type": "image/png",
+      "form_factor": "narrow"
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false
+}

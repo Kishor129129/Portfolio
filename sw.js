@@ -16,6 +16,10 @@ const STATIC_CACHE_URLS = [
   '/assets/images/ai.png',
   '/assets/images/data.png',
   '/assets/images/backend.png',
+  '/sitemap.xml',
+  '/robots.txt',
+  '/manifest.json',
+  '/browserconfig.xml',
   'https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap',
   'https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js',
   'https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js'
