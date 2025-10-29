@@ -920,3 +920,70 @@ function initScrollToTop() {
 document.addEventListener('DOMContentLoaded', function() {
   initScrollToTop();
 });
+
+//-----------------------------------*\
+// THEME TOGGLE FUNCTIONALITY
+//-----------------------------------*/
+
+function initThemeToggle() {
+  const themeToggle = document.getElementById('themeToggle');
+  const themeIcon = document.getElementById('themeIcon');
+  const html = document.documentElement;
+  
+  if (!themeToggle || !themeIcon) return;
+  
+  // Get saved theme preference or use system preference
+  let currentTheme = localStorage.getItem('theme');
+  
+  // If no saved preference, check system preference
+  if (!currentTheme) {
+    const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+    currentTheme = prefersLight ? 'light' : 'dark';
+  }
+  
+  // Apply theme
+  function setTheme(theme) {
+    html.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+    currentTheme = theme;
+    
+    // Update icon
+    if (theme === 'light') {
+      themeIcon.setAttribute('name', 'sunny-outline');
+    } else {
+      themeIcon.setAttribute('name', 'moon-outline');
+    }
+  }
+  
+  // Initialize theme on page load
+  setTheme(currentTheme);
+  
+  // Listen for system theme changes (only if user hasn't set a preference)
+  const mediaQuery = window.matchMedia('(prefers-color-scheme: light)');
+  mediaQuery.addEventListener('change', (e) => {
+    // Only update if user hasn't manually set a preference
+    if (!localStorage.getItem('theme')) {
+      setTheme(e.matches ? 'light' : 'dark');
+    }
+  });
+  
+  // Toggle theme on button click
+  themeToggle.addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    setTheme(newTheme);
+    
+    // Add animation effect
+    themeIcon.style.transform = 'rotate(360deg) scale(1.2)';
+    setTimeout(() => {
+      themeIcon.style.transform = '';
+    }, 300);
+  });
+}
+
+// Initialize theme toggle on DOM load
+document.addEventListener('DOMContentLoaded', function() {
+  initThemeToggle();
+});

@@ -186,6 +186,135 @@ img.lazy.loaded {
 
 }
 
+/*-----------------------------------*\
+  #LIGHT THEME
+\*-----------------------------------*/
+
+[data-theme="light"] {
+  /* Light theme gradients */
+  --bg-gradient-onyx: linear-gradient(
+    to bottom right, 
+    hsl(0, 0%, 95%) 3%, 
+    hsl(0, 0%, 98%) 97%
+  );
+  --bg-gradient-jet: linear-gradient(
+    to bottom right, 
+    hsla(0, 0%, 100%, 0.9) 0%, 
+    hsla(0, 0%, 95%, 0) 100%
+  ), hsl(0, 0%, 100%);
+  --bg-gradient-yellow-2: linear-gradient(
+    135deg, 
+    hsla(45, 100%, 71%, 0.15) 0%, 
+    hsla(35, 100%, 68%, 0) 59.86%
+  ), hsl(0, 0%, 100%);
+  --border-gradient-onyx: linear-gradient(
+    to bottom right, 
+    hsl(0, 0%, 85%) 0%, 
+    hsla(0, 0%, 85%, 0) 50%
+  );
+
+  /* Light theme solid colors */
+  --jet: hsl(0, 0%, 75%);
+  --onyx: hsl(0, 0%, 90%);
+  --eerie-black-1: hsl(0, 0%, 98%);
+  --eerie-black-2: hsl(0, 0%, 100%);
+  --smoky-black: hsl(0, 0%, 100%);
+  --white-1: hsl(240, 2%, 13%);
+  --white-2: hsl(240, 2%, 15%);
+  --light-gray: hsl(240, 2%, 35%);
+  --light-gray-70: hsla(240, 2%, 35%, 0.7);
+  
+  /* Keep accent colors the same */
+  --orange-yellow-crayola: hsl(45, 100%, 55%);
+  --vegas-gold: hsl(45, 54%, 45%);
+
+  /* Light theme shadows */
+  --shadow-1: -4px 8px 24px hsla(0, 0%, 0%, 0.1);
+  --shadow-2: 0 16px 30px hsla(0, 0%, 0%, 0.1);
+  --shadow-3: 0 16px 40px hsla(0, 0%, 0%, 0.1);
+  --shadow-4: 0 25px 50px hsla(0, 0%, 0%, 0.08);
+  --shadow-5: 0 24px 80px hsla(0, 0%, 0%, 0.1);
+}
+
+[data-theme="light"] body {
+  background: hsl(0, 0%, 98%);
+}
+
+[data-theme="light"] .sidebar,
+[data-theme="light"] article {
+  background: var(--eerie-black-2);
+  border: 1px solid var(--jet);
+}
+
+[data-theme="light"] .navbar {
+  background: hsla(0, 0%, 100%, 0.85);
+  border: 1px solid var(--jet);
+}
+
+[data-theme="light"] .navbar-link {
+  color: var(--white-2);
+}
+
+[data-theme="light"] .navbar-link:hover,
+[data-theme="light"] .navbar-link:focus {
+  color: var(--light-gray);
+  background: hsla(0, 0%, 0%, 0.05);
+}
+
+[data-theme="light"] .navbar-link.active {
+  color: var(--orange-yellow-crayola);
+  background: hsla(45, 100%, 72%, 0.15);
+}
+
+[data-theme="light"] .particles-container,
+[data-theme="light"] .floating-icons {
+  opacity: 0.3;
+}
+
+[data-theme="light"] .project-item {
+  background: var(--eerie-black-2);
+  border: 1px solid var(--jet);
+}
+
+[data-theme="light"] .contact-info-item,
+[data-theme="light"] .contact-form,
+[data-theme="light"] .experience-item,
+[data-theme="light"] .service-item {
+  background: var(--eerie-black-2);
+  border: 1px solid var(--jet);
+}
+
+[data-theme="light"] .skills-category,
+[data-theme="light"] .skill-item {
+  background: var(--eerie-black-1);
+  border: 1px solid var(--jet);
+}
+
+[data-theme="light"] .project-content {
+  background: var(--bg-gradient-jet);
+}
+
+[data-theme="light"] .hero-profile-image {
+  border-color: var(--orange-yellow-crayola);
+  box-shadow: 0 10px 40px hsla(45, 100%, 55%, 0.3);
+}
+
+/* Theme Toggle Button Styles */
+
+/* Smooth theme transition */
+* {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+/* Disable transition for performance-critical elements */
+.particle,
+.floating-icon,
+.matrix-char,
+.neural-node,
+.quantum-particle {
+  transition: none !important;
+}
+
 
 
 
@@ -584,6 +713,56 @@ main {
   font-weight: var(--fw-500);
 }
 
+/* Theme toggle specific styles */
+.theme-toggle-item {
+  flex: 0 0 auto;
+  width: auto;
+  min-width: 44px;
+}
+
+.theme-toggle-btn {
+  color: var(--light-gray);
+  font-size: var(--fs-8);
+  padding: 20px 12px;
+  transition: all var(--transition-1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+.theme-toggle-btn:hover,
+.theme-toggle-btn:focus {
+  color: var(--light-gray-70);
+  background: hsla(0, 0%, 100%, 0.05);
+}
+
+.theme-toggle-btn ion-icon {
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+}
+
+.theme-toggle-btn:hover ion-icon {
+  transform: rotate(20deg) scale(1.1);
+}
+
+[data-theme="light"] .theme-toggle-btn {
+  color: var(--white-2);
+}
+
+[data-theme="light"] .theme-toggle-btn:hover,
+[data-theme="light"] .theme-toggle-btn:focus {
+  color: var(--light-gray);
+  background: hsla(0, 0%, 0%, 0.05);
+}
+
+[data-theme="light"] .theme-toggle-btn ion-icon {
+  color: var(--orange-yellow-crayola);
+}
+
 /* Responsive navigation */
 @media (max-width: 768px) {
   .navbar {
@@ -594,6 +773,10 @@ main {
   .navbar-list {
     padding: 0 20px;
     gap: 5px;
+  }
+  
+  .theme-toggle-btn {
+    padding: 18px 8px;
   }
 }
 
@@ -612,6 +795,14 @@ main {
     padding: 18px 4px;
     font-size: 11px;
   }
+  
+  .theme-toggle-btn {
+    padding: 18px 6px;
+  }
+  
+  .theme-toggle-btn ion-icon {
+    font-size: 1rem;
+  }
 }
 
 @media (max-width: 360px) {
@@ -628,6 +819,14 @@ main {
   .navbar-link {
     padding: 16px 2px;
     font-size: 10px;
+  }
+  
+  .theme-toggle-btn {
+    padding: 16px 4px;
+  }
+  
+  .theme-toggle-btn ion-icon {
+    font-size: 0.9rem;
   }
 }
 
