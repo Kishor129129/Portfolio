@@ -412,11 +412,34 @@ article {
 
 .icon-box ion-icon { --ionicon-stroke-width: 35px; }
 
-article { display: none; }
+article { 
+  display: none;
+  transition: opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+article:not(.active) {
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;
+}
 
 article.active {
   display: block;
-  animation: fade 0.5s ease backwards;
+  opacity: 1;
+  transform: translateY(0);
+  animation: pageFadeIn 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@keyframes pageFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes fade {
@@ -5067,6 +5090,36 @@ textarea.form-input::-webkit-resizer { display: none; }
 }
 
 /*-----------------------------------*\
+  #SCROLL PROGRESS BAR
+\*-----------------------------------*/
+
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 4px;
+  background: linear-gradient(90deg, 
+    var(--orange-yellow-crayola), 
+    var(--vegas-gold),
+    var(--orange-yellow-crayola));
+  background-size: 200% 100%;
+  z-index: 9999;
+  transition: width 0.1s ease;
+  box-shadow: 0 2px 10px rgba(255, 193, 7, 0.5);
+  animation: progressShimmer 2s linear infinite;
+}
+
+@keyframes progressShimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/*-----------------------------------*\
   #SCROLL TO TOP BUTTON
 \*-----------------------------------*/
 
@@ -5121,5 +5174,348 @@ textarea.form-input::-webkit-resizer { display: none; }
     width: 45px;
     height: 45px;
     font-size: 18px;
+  }
+  
+  .scroll-progress {
+    height: 3px;
+  }
+}
+
+/*-----------------------------------*\
+  #CONFETTI EFFECT
+\*-----------------------------------*/
+
+.confetti-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9998;
+  overflow: hidden;
+}
+
+.confetti-piece {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: var(--orange-yellow-crayola);
+  border-radius: 50%;
+  animation: confetti-fall 3s ease-out forwards;
+}
+
+.confetti-piece:nth-child(odd) {
+  background: var(--vegas-gold);
+}
+
+.confetti-piece:nth-child(3n) {
+  background: #ff6b6b;
+  border-radius: 0;
+}
+
+.confetti-piece:nth-child(4n) {
+  background: #4ecdc4;
+}
+
+.confetti-piece:nth-child(5n) {
+  background: #45b7d1;
+  border-radius: 20%;
+}
+
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(0) translateX(0) rotate(0deg) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) translateX(var(--random-x, 0)) rotate(720deg) scale(0.5);
+    opacity: 0;
+  }
+}
+
+/*-----------------------------------*\
+  #CURSOR TRAIL EFFECT
+\*-----------------------------------*/
+
+.cursor-trail {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: difference;
+  transition: transform 0.1s ease;
+}
+
+.cursor-trail::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle, 
+    rgba(255, 193, 7, 0.8) 0%, 
+    rgba(255, 193, 7, 0.4) 50%, 
+    transparent 100%);
+  animation: cursorPulse 1s ease-in-out infinite;
+}
+
+@keyframes cursorPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 0.4;
+  }
+}
+
+.cursor-trail-particle {
+  position: fixed;
+  width: 4px;
+  height: 4px;
+  background: var(--orange-yellow-crayola);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0.6;
+  animation: cursorFade 1s ease-out forwards;
+}
+
+@keyframes cursorFade {
+  0% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0);
+  }
+}
+
+/*-----------------------------------*\
+  #PAGE TRANSITION ANIMATIONS
+\*-----------------------------------*/
+
+/* Page transition animations are handled in the article section above */
+
+/*-----------------------------------*\
+  #PARALLAX SCROLLING EFFECTS
+\*-----------------------------------*/
+
+.parallax-slow {
+  will-change: transform;
+  transition: transform 0.1s ease-out;
+}
+
+.parallax-medium {
+  will-change: transform;
+  transition: transform 0.1s ease-out;
+}
+
+.parallax-fast {
+  will-change: transform;
+  transition: transform 0.1s ease-out;
+}
+
+/*-----------------------------------*\
+  #ENHANCED HOVER ANIMATIONS
+\*-----------------------------------*/
+
+.hover-lift {
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(255, 193, 7, 0.2);
+}
+
+.hover-glow {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.hover-glow::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: inherit;
+  background: linear-gradient(45deg, 
+    var(--orange-yellow-crayola), 
+    var(--vegas-gold),
+    var(--orange-yellow-crayola));
+  background-size: 200% 200%;
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.3s ease;
+  animation: glowRotate 3s linear infinite;
+  filter: blur(8px);
+}
+
+.hover-glow:hover::before {
+  opacity: 0.6;
+}
+
+@keyframes glowRotate {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/*-----------------------------------*\
+  #LOADING ANIMATIONS
+\*-----------------------------------*/
+
+.loading-skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--eerie-black-1) 0%,
+    var(--eerie-black-2) 50%,
+    var(--eerie-black-1) 100%
+  );
+  background-size: 200% 100%;
+  animation: skeletonLoading 1.5s ease-in-out infinite;
+}
+
+@keyframes skeletonLoading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/*-----------------------------------*\
+  #TEXT ANIMATIONS
+\*-----------------------------------*/
+
+@keyframes typewriter {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blinkCursor {
+  from, to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: var(--orange-yellow-crayola);
+  }
+}
+
+.typewriter-text {
+  overflow: hidden;
+  border-right: 2px solid var(--orange-yellow-crayola);
+  white-space: nowrap;
+  animation: typewriter 3s steps(40, end), blinkCursor 0.75s step-end infinite;
+}
+
+/*-----------------------------------*\
+  #BOUNCE ANIMATION ENHANCEMENT
+\*-----------------------------------*/
+
+.bounce-in {
+  animation: bounceIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) translateY(-100px);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05) translateY(10px);
+  }
+  70% {
+    transform: scale(0.9) translateY(-5px);
+  }
+  100% {
+    transform: scale(1) translateY(0);
+  }
+}
+
+/*-----------------------------------*\
+  #FLOATING ANIMATION
+\*-----------------------------------*/
+
+.float-animation {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+/*-----------------------------------*\
+  #RIPPLE EFFECT
+\*-----------------------------------*/
+
+.ripple-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple-effect::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 193, 7, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.ripple-effect:active::after {
+  width: 300px;
+  height: 300px;
+  opacity: 0;
+}
+
+/*-----------------------------------*\
+  #SHIMMER EFFECT
+\*-----------------------------------*/
+
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--eerie-black-1) 0%,
+    var(--eerie-black-2) 50%,
+    var(--eerie-black-1) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
   }
 }

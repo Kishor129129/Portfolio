@@ -922,6 +922,247 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 //-----------------------------------*\
+// SCROLL PROGRESS BAR
+//-----------------------------------*/
+
+function initScrollProgress() {
+  const progressBar = document.getElementById('scrollProgress');
+  if (!progressBar) return;
+  
+  let ticking = false;
+  
+  function updateProgress() {
+    const windowHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const scrolled = windowHeight > 0 ? (window.scrollY / windowHeight) * 100 : 0;
+    progressBar.style.width = Math.min(scrolled, 100) + '%';
+    ticking = false;
+  }
+  
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(updateProgress);
+      ticking = true;
+    }
+  }, { passive: true });
+  
+  // Initial update
+  updateProgress();
+}
+
+//-----------------------------------*\
+// CONFETTI EFFECT
+//-----------------------------------*/
+
+function createConfetti(x, y) {
+  const colors = [
+    'var(--orange-yellow-crayola)',
+    'var(--vegas-gold)',
+    '#ff6b6b',
+    '#4ecdc4',
+    '#45b7d1',
+    '#96ceb4',
+    '#ffeaa7'
+  ];
+  
+  const container = document.createElement('div');
+  container.className = 'confetti-container';
+  document.body.appendChild(container);
+  
+  const pieceCount = 60;
+  
+  for (let i = 0; i < pieceCount; i++) {
+    const piece = document.createElement('div');
+    piece.className = 'confetti-piece';
+    
+    const randomX = (Math.random() - 0.5) * 400;
+    piece.style.setProperty('--random-x', randomX + 'px');
+    
+    piece.style.left = x + 'px';
+    piece.style.top = y + 'px';
+    piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+    
+    const size = Math.random() * 12 + 6;
+    piece.style.width = size + 'px';
+    piece.style.height = size + 'px';
+    
+    piece.style.animationDelay = Math.random() * 0.5 + 's';
+    piece.style.animationDuration = Math.random() * 2 + 2.5 + 's';
+    
+    container.appendChild(piece);
+  }
+  
+  setTimeout(() => {
+    container.remove();
+  }, 5000);
+}
+
+//-----------------------------------*\
+// CURSOR TRAIL EFFECT
+//-----------------------------------*/
+
+function initCursorTrail() {
+  // Skip on touch devices
+  if ('ontouchstart' in window) return;
+  
+  const cursor = document.createElement('div');
+  cursor.className = 'cursor-trail';
+  document.body.appendChild(cursor);
+  
+  let lastX = 0;
+  let lastY = 0;
+  let particles = [];
+  let particleCount = 0;
+  
+  document.addEventListener('mousemove', (e) => {
+    const x = e.clientX;
+    const y = e.clientY;
+    
+    cursor.style.left = x + 'px';
+    cursor.style.top = y + 'px';
+    
+    // Create particles on movement
+    if (Math.abs(x - lastX) > 5 || Math.abs(y - lastY) > 5) {
+      if (particleCount % 3 === 0) {
+        createCursorParticle(x, y);
+      }
+      particleCount++;
+    }
+    
+    lastX = x;
+    lastY = y;
+  });
+  
+  document.addEventListener('mouseenter', () => {
+    cursor.style.opacity = '1';
+  });
+  
+  document.addEventListener('mouseleave', () => {
+    cursor.style.opacity = '0';
+  });
+  
+  function createCursorParticle(x, y) {
+    const particle = document.createElement('div');
+    particle.className = 'cursor-trail-particle';
+    particle.style.left = x + 'px';
+    particle.style.top = y + 'px';
+    document.body.appendChild(particle);
+    
+    setTimeout(() => {
+      particle.remove();
+    }, 1000);
+  }
+}
+
+//-----------------------------------*\
+// PAGE TRANSITION ANIMATIONS
+//-----------------------------------*/
+
+function initPageTransitions() {
+  const pages = document.querySelectorAll('[data-page]');
+  
+  pages.forEach(page => {
+    // Add transition class when page becomes active
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+          if (page.classList.contains('active')) {
+            page.style.animation = 'pageFadeIn 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+          }
+        }
+      });
+    });
+    
+    observer.observe(page, {
+      attributes: true,
+      attributeFilter: ['class']
+    });
+  });
+}
+
+//-----------------------------------*\
+// PARALLAX SCROLLING
+//-----------------------------------*/
+
+function initParallax() {
+  const parallaxElements = document.querySelectorAll('.parallax-slow, .parallax-medium, .parallax-fast');
+  
+  if (parallaxElements.length === 0) return;
+  
+  let ticking = false;
+  
+  function updateParallax() {
+    parallaxElements.forEach(element => {
+      const rect = element.getBoundingClientRect();
+      const speed = element.classList.contains('parallax-fast') ? 0.5 :
+                   element.classList.contains('parallax-medium') ? 0.3 : 0.1;
+      
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        const yPos = -(rect.top - window.innerHeight / 2) * speed;
+        element.style.transform = `translateY(${yPos}px)`;
+      }
+    });
+    
+    ticking = false;
+  }
+  
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(updateParallax);
+      ticking = true;
+    }
+  }, { passive: true });
+}
+
+//-----------------------------------*\
+// ENHANCED PROJECT CLICK EFFECTS
+//-----------------------------------*/
+
+function initProjectClickEffects() {
+  const projectLinks = document.querySelectorAll('.project-item > a');
+  
+  projectLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      const rect = link.getBoundingClientRect();
+      const x = rect.left + rect.width / 2;
+      const y = rect.top + rect.height / 2;
+      
+      // Create confetti effect
+      createConfetti(x, y);
+      
+      // Add ripple effect
+      link.classList.add('ripple-effect');
+      setTimeout(() => {
+        link.classList.remove('ripple-effect');
+      }, 600);
+    });
+  });
+}
+
+//-----------------------------------*\
+// INITIALIZE ALL ANIMATIONS
+//-----------------------------------*/
+
+document.addEventListener('DOMContentLoaded', function() {
+  initScrollProgress();
+  initCursorTrail();
+  initPageTransitions();
+  initParallax();
+  initProjectClickEffects();
+  
+  // Add hover-lift to service items
+  const serviceItems = document.querySelectorAll('.service-item');
+  serviceItems.forEach(item => {
+    item.classList.add('hover-lift');
+  });
+  
+  // Add hover-glow to project titles
+  const projectTitles = document.querySelectorAll('.project-title');
+  projectTitles.forEach(title => {
+    title.classList.add('hover-glow');
+  });
+});
+
+//-----------------------------------*\
 // THEME TOGGLE FUNCTIONALITY
 //-----------------------------------*/
 
