@@ -3110,6 +3110,158 @@ textarea.form-input::-webkit-resizer { display: none; }
   border-radius: 2px;
 }
 
+/*-----------------------------------*\
+  #STATS SECTION
+\*-----------------------------------*/
+
+.stats-section {
+  margin: 60px 0;
+  padding: 40px 0;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 25px;
+  margin-top: 30px;
+}
+
+.stat-card {
+  background: var(--eerie-black-2);
+  border: 1px solid var(--jet);
+  border-radius: 16px;
+  padding: 30px 25px;
+  text-align: center;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, 
+    var(--orange-yellow-crayola), 
+    var(--vegas-gold),
+    var(--orange-yellow-crayola));
+  background-size: 200% 100%;
+  transform: scaleX(0);
+  transition: transform 0.5s ease;
+  animation: shimmer 3s infinite;
+}
+
+.stat-card:hover::before {
+  transform: scaleX(1);
+}
+
+.stat-card:hover {
+  border-color: var(--orange-yellow-crayola);
+  box-shadow: 0 20px 40px hsla(45, 100%, 72%, 0.2);
+  transform: translateY(-8px);
+}
+
+.stat-icon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 20px;
+  background: var(--bg-gradient-yellow-2);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.stat-icon ion-icon {
+  font-size: 28px;
+  color: var(--orange-yellow-crayola);
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover .stat-icon {
+  background: var(--bg-gradient-yellow-1);
+  transform: scale(1.1) rotate(5deg);
+}
+
+.stat-card:hover .stat-icon ion-icon {
+  color: var(--eerie-black-1);
+  transform: scale(1.2);
+}
+
+.stat-content {
+  position: relative;
+  z-index: 1;
+}
+
+.stat-number {
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-weight: var(--fw-600);
+  background: var(--text-gradient-yellow);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+  margin-bottom: 10px;
+  display: block;
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover .stat-number {
+  transform: scale(1.1);
+}
+
+.stat-label {
+  color: var(--light-gray);
+  font-size: var(--fs-6);
+  font-weight: var(--fw-500);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Stats Animation */
+.stat-card.animated {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Responsive Stats */
+@media (max-width: 768px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  
+  .stat-card {
+    padding: 25px 20px;
+  }
+  
+  .stat-icon {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .stat-icon ion-icon {
+    font-size: 24px;
+  }
+  
+  .stat-number {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* Hero Section */
 .hero-section {
   margin: 40px 0;
@@ -3179,6 +3331,125 @@ textarea.form-input::-webkit-resizer { display: none; }
   font-weight: var(--fw-500);
   margin-bottom: 20px;
   text-align: center;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.static-text {
+  color: var(--light-gray-70);
+}
+
+.rotating-text {
+  position: relative;
+  display: inline-block;
+  min-width: 280px;
+  height: 40px;
+  text-align: left;
+}
+
+.rotating-text-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+  transform: translateY(20px) rotateX(90deg) scale(0.8);
+  background: var(--text-gradient-yellow);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: var(--fw-600);
+  animation: rotateText 12s infinite, pulseGlow 2s ease-in-out infinite;
+  white-space: nowrap;
+  text-shadow: 0 0 20px rgba(255, 193, 7, 0.3);
+  filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.rotating-text-item:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.rotating-text-item:nth-child(2) {
+  animation-delay: 2s;
+}
+
+.rotating-text-item:nth-child(3) {
+  animation-delay: 4s;
+}
+
+.rotating-text-item:nth-child(4) {
+  animation-delay: 6s;
+}
+
+.rotating-text-item:nth-child(5) {
+  animation-delay: 8s;
+}
+
+.rotating-text-item:nth-child(6) {
+  animation-delay: 10s;
+}
+
+@keyframes rotateText {
+  0%, 12% {
+    opacity: 0;
+    transform: translateY(20px) rotateX(90deg) scale(0.8);
+    filter: blur(10px);
+  }
+  15%, 17% {
+    opacity: 1;
+    transform: translateY(0) rotateX(0deg) scale(1);
+    filter: blur(0px) drop-shadow(0 0 10px rgba(255, 193, 7, 0.3));
+  }
+  20%, 100% {
+    opacity: 0;
+    transform: translateY(-20px) rotateX(-90deg) scale(0.8);
+    filter: blur(10px);
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    filter: blur(0px) drop-shadow(0 0 10px rgba(255, 193, 7, 0.3));
+  }
+  50% {
+    filter: blur(0px) drop-shadow(0 0 25px rgba(255, 193, 7, 0.6));
+  }
+}
+
+/* Enhanced rotating text with glow effect - merged with main definition */
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .hero-subtitle {
+    min-height: 50px;
+    font-size: var(--fs-3);
+  }
+  
+  .rotating-text {
+    min-width: 240px;
+    height: 35px;
+  }
+  
+  .rotating-text-item {
+    font-size: var(--fs-3);
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-subtitle {
+    flex-direction: column;
+    min-height: 80px;
+  }
+  
+  .rotating-text {
+    min-width: 100%;
+    text-align: center;
+  }
 }
 
 .hero-description {
@@ -4168,6 +4439,115 @@ textarea.form-input::-webkit-resizer { display: none; }
     transform: translateY(-100px) translateX(100px) rotate(360deg);
     opacity: 0;
   }
+}
+
+/*-----------------------------------*\
+  #JAPANESE CHERRY BLOSSOM ANIMATION
+\*-----------------------------------*/
+
+.cherry-blossom-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.cherry-blossom {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.cherry-blossom::before,
+.cherry-blossom::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50% 0 50% 0;
+  background: linear-gradient(135deg, rgba(255, 182, 193, 0.8), rgba(255, 192, 203, 0.6));
+  transform-origin: center;
+}
+
+.cherry-blossom::before {
+  transform: rotate(0deg);
+  box-shadow: 0 0 10px rgba(255, 182, 193, 0.5);
+}
+
+.cherry-blossom::after {
+  transform: rotate(90deg);
+  box-shadow: 0 0 10px rgba(255, 192, 203, 0.5);
+}
+
+.cherry-blossom.petal-1 {
+  animation: cherryBlossomFall 15s linear infinite;
+  animation-delay: 0s;
+}
+
+.cherry-blossom.petal-2 {
+  animation: cherryBlossomFall 18s linear infinite;
+  animation-delay: 2s;
+}
+
+.cherry-blossom.petal-3 {
+  animation: cherryBlossomFall 20s linear infinite;
+  animation-delay: 4s;
+}
+
+.cherry-blossom.petal-4 {
+  animation: cherryBlossomFall 16s linear infinite;
+  animation-delay: 1s;
+}
+
+.cherry-blossom.petal-5 {
+  animation: cherryBlossomFall 22s linear infinite;
+  animation-delay: 3s;
+}
+
+@keyframes cherryBlossomFall {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px) translateX(0) rotate(0deg) scale(0.5);
+  }
+  10% {
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(50vh) translateX(30px) rotate(180deg) scale(1);
+  }
+  90% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(100vh) translateX(-50px) rotate(360deg) scale(0.8);
+  }
+}
+
+/* Golden cherry blossom variant for theme consistency */
+.cherry-blossom.golden::before,
+.cherry-blossom.golden::after {
+  background: linear-gradient(135deg, rgba(255, 193, 7, 0.6), rgba(255, 215, 0, 0.4));
+  box-shadow: 0 0 15px rgba(255, 193, 7, 0.4);
+}
+
+/* Light theme support */
+[data-theme="light"] .cherry-blossom::before,
+[data-theme="light"] .cherry-blossom::after {
+  background: linear-gradient(135deg, rgba(255, 182, 193, 0.9), rgba(255, 192, 203, 0.7));
+  box-shadow: 0 0 12px rgba(255, 182, 193, 0.6);
+}
+
+[data-theme="light"] .cherry-blossom.golden::before,
+[data-theme="light"] .cherry-blossom.golden::after {
+  background: linear-gradient(135deg, rgba(255, 193, 7, 0.7), rgba(255, 215, 0, 0.5));
+  box-shadow: 0 0 18px rgba(255, 193, 7, 0.5);
 }
 
 /*-----------------------------------*\

@@ -186,6 +186,26 @@ const animateOnScroll = function () {
       }
     }
   });
+  
+  // Animate stat cards
+  const statCards = document.querySelectorAll('.stat-card');
+  statCards.forEach((card, index) => {
+    const cardTop = card.getBoundingClientRect().top;
+    const cardVisible = 100;
+    
+    if (cardTop < window.innerHeight - cardVisible) {
+      setTimeout(() => {
+        card.classList.add('animated');
+        // Animate counter inside this card
+        const counter = card.querySelector('.counter');
+        if (counter) {
+          setTimeout(() => {
+            animateCounter(counter);
+          }, index * 200); // Stagger counter animations
+        }
+      }, index * 100); // Stagger card animations
+    }
+  });
 };
 
 // Text Reveal Animation
@@ -249,6 +269,46 @@ const createFloatingIcons = function () {
   }
 };
 
+// Japanese Cherry Blossom Animation
+const createCherryBlossoms = function () {
+  const container = document.getElementById('cherry-blossom-container');
+  if (!container) return;
+  
+  const blossomCount = 30; // Number of cherry blossoms
+  const petalVariants = ['petal-1', 'petal-2', 'petal-3', 'petal-4', 'petal-5'];
+  
+  for (let i = 0; i < blossomCount; i++) {
+    const blossom = document.createElement('div');
+    blossom.className = 'cherry-blossom';
+    
+    // Randomly assign petal variant
+    const petalVariant = petalVariants[Math.floor(Math.random() * petalVariants.length)];
+    blossom.classList.add(petalVariant);
+    
+    // Randomly make some blossoms golden to match theme
+    if (Math.random() > 0.7) {
+      blossom.classList.add('golden');
+    }
+    
+    // Random starting position across the top
+    blossom.style.left = `${Math.random() * 100}%`;
+    
+    // Random size variation
+    const size = Math.random() * 10 + 10; // Between 10px and 20px
+    blossom.style.width = `${size}px`;
+    blossom.style.height = `${size}px`;
+    
+    // Random animation delay for staggered effect
+    blossom.style.animationDelay = `${Math.random() * 10}s`;
+    
+    // Random horizontal drift variation
+    const drift = (Math.random() - 0.5) * 100;
+    blossom.style.setProperty('--drift', `${drift}px`);
+    
+    container.appendChild(blossom);
+  }
+};
+
 // Magnetic Effect for Elements
 const initMagneticEffect = function () {
   const magneticElements = document.querySelectorAll('.magnetic');
@@ -300,10 +360,16 @@ const initCardTilt = function () {
 
 // Counter animation function
 const animateCounter = function (element) {
-  const target = parseInt(element.textContent.replace(/[^\d]/g, ''));
-  const suffix = element.textContent.replace(/[\d]/g, '');
+  // Check if already animated
+  if (element.dataset.animated === 'true') return;
+  element.dataset.animated = 'true';
+  
+  const target = parseInt(element.dataset.target || element.textContent.replace(/[^\d]/g, ''));
+  const suffix = element.textContent.replace(/[\d]/g, '') || '';
   let current = 0;
-  const increment = target / 50;
+  const duration = 2000; // 2 seconds
+  const increment = target / (duration / 16); // 60fps
+  
   const timer = setInterval(() => {
     current += increment;
     if (current >= target) {
@@ -311,7 +377,7 @@ const animateCounter = function (element) {
       clearInterval(timer);
     }
     element.textContent = Math.floor(current) + suffix;
-  }, 30);
+  }, 16);
 };
 
 // Add scroll event listener
@@ -487,6 +553,9 @@ document.addEventListener('DOMContentLoaded', function() {
   // Create particle effects
   createParticles();
   createFloatingIcons();
+  
+  // Create Japanese cherry blossom animation
+  createCherryBlossoms();
   
   // Initialize ultra-advanced animations
   initUltraAdvancedAnimations();
