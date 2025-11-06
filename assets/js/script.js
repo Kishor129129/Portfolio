@@ -1297,3 +1297,95 @@ function initThemeToggle() {
 document.addEventListener('DOMContentLoaded', function() {
   initThemeToggle();
 });
+
+//-----------------------------------*\
+// TYPING ANIMATION FOR ROTATING TEXT
+//-----------------------------------*/
+
+function initTypingAnimation() {
+  const rotatingTextContainer = document.getElementById('rotatingText');
+  if (!rotatingTextContainer) return;
+  
+  const textItems = rotatingTextContainer.querySelectorAll('.rotating-text-item');
+  if (textItems.length === 0) return;
+  
+  let currentIndex = 0;
+  let isDeleting = false;
+  let currentText = '';
+  let typingSpeed = 100; // milliseconds per character
+  let deletingSpeed = 50; // faster when deleting
+  let pauseTime = 2000; // pause after completing a word
+  
+  // Get all text content from items
+  const texts = Array.from(textItems).map(item => item.textContent.trim());
+  
+  function typeText() {
+    const targetText = texts[currentIndex];
+    
+    if (!isDeleting) {
+      // Typing forward
+      if (currentText.length < targetText.length) {
+        currentText = targetText.substring(0, currentText.length + 1);
+        updateDisplay();
+        setTimeout(typeText, typingSpeed);
+      } else {
+        // Finished typing, pause then start deleting
+        setTimeout(() => {
+          isDeleting = true;
+          typeText();
+        }, pauseTime);
+      }
+    } else {
+      // Deleting backward
+      if (currentText.length > 0) {
+        currentText = currentText.substring(0, currentText.length - 1);
+        updateDisplay();
+        setTimeout(typeText, deletingSpeed);
+      } else {
+        // Finished deleting, move to next text
+        isDeleting = false;
+        currentIndex = (currentIndex + 1) % texts.length;
+        setTimeout(typeText, 200); // Brief pause before next word
+      }
+    }
+  }
+  
+  function updateDisplay() {
+    // Update the active item's display
+    textItems.forEach((item, index) => {
+      if (index === currentIndex) {
+        // Remove existing cursor before updating text
+        const existingCursor = item.querySelector('.typing-cursor');
+        if (existingCursor) {
+          existingCursor.remove();
+        }
+        
+        item.textContent = currentText;
+        item.classList.add('typing-active');
+        
+        // Add cursor effect
+        const cursor = document.createElement('span');
+        cursor.className = 'typing-cursor';
+        cursor.textContent = '|';
+        item.appendChild(cursor);
+      } else {
+        item.classList.remove('typing-active');
+        // Remove cursor from inactive items
+        const existingCursor = item.querySelector('.typing-cursor');
+        if (existingCursor) {
+          existingCursor.remove();
+        }
+      }
+    });
+  }
+  
+  // Start the typing animation
+  setTimeout(() => {
+    typeText();
+  }, 1000); // Initial delay before starting
+}
+
+// Initialize typing animation on DOM load
+document.addEventListener('DOMContentLoaded', function() {
+  initTypingAnimation();
+});

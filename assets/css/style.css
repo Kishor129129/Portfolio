@@ -3421,6 +3421,42 @@ textarea.form-input::-webkit-resizer { display: none; }
   }
 }
 
+/* Typing Animation Styles */
+.rotating-text-item.typing-active {
+  opacity: 1;
+  transform: translateY(0) rotateX(0deg) scale(1);
+  filter: blur(0px) drop-shadow(0 0 10px rgba(255, 193, 7, 0.3));
+  animation: none;
+  position: relative;
+  white-space: nowrap;
+}
+
+.rotating-text-item:not(.typing-active) {
+  opacity: 0;
+  animation: none;
+}
+
+.typing-cursor {
+  display: inline-block;
+  color: var(--orange-yellow-crayola);
+  font-weight: var(--fw-700);
+  margin-left: 2px;
+  animation: blinkCursor 1s infinite;
+  background: var(--text-gradient-yellow);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@keyframes blinkCursor {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
+
 /* Enhanced rotating text with glow effect - merged with main definition */
 
 /* Mobile responsive */
